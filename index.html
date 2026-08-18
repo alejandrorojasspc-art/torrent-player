@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Torrent Player</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #1e1e1e; color: #fff; }
+    input { width: 70%; padding: 10px; font-size: 16px; }
+    button { padding: 10px 15px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>Запуск Magnet-ссылки</h2>
+  <input type="text" id="magnetInput" placeholder="Вставьте magnet:?xt=urn:btih:..." />
+  <button onclick="startPlay()">Смотреть</button>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+    function startPlay() {
+      const magnet = document.getElementById('magnetInput').value;
+      if (magnet) {
+        ipcRenderer.send('play-magnet', magnet);
+      }
+    }
+  </script>
+</body>
+</html>
